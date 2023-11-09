@@ -1,0 +1,8 @@
+1.Filtreleme işlemi yapılacak:
+    Ürün çeşitlerine göre filtreleme butonları oluşturulacak.
+    Search bar kullanıcının girdiği ürün adına göre filtreleme yapacak.
+
+2. Authentication için firebase kullanılacak.
+    Kullanıcı giriş yapmadıysa navbar değişecek!!!!
+    Kullanıcı giriş yapmadıysa search bar değişecek
+
