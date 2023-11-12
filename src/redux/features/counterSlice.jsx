@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: 0,
+  totalValue:0,
 };
 
 export const counterSlice = createSlice({
@@ -15,6 +16,8 @@ export const counterSlice = createSlice({
       } else {
         state[productId] = { value: 1 };
       }
+      state.totalValue +=1;
+      console.log('Total',state.totalValue);
     },
   },
 });
