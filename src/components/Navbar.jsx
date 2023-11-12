@@ -17,7 +17,7 @@ const Navbar = ({ users }) => {
           onClick={() => {
             window.location = "/";
           }}
-          className="text-5xl font-bold"
+          className="text-5xl font-bold cursor-pointer"
         >
           E-Market
         </p>
@@ -41,17 +41,30 @@ const Navbar = ({ users }) => {
 
             <p className="font-semibold text-lg">Çıkış Yap</p>
           </div>
-          <div className="flex gap-3 items-center mx-5 cursor-pointer ">
+          <div
+            onClick={() => {
+              window.location = "/wallet";
+            }}
+            className="flex gap-3 items-center mx-5 cursor-pointer "
+          >
             <div className="border rounded-full bg-gray-300 flex items-center w-12 h-12 justify-center">
               <LuWallet size={"40px"} />
             </div>
             <p className="font-semibold text-lg">Cüzdanım</p>
+            <p className="bg-slate-300 w-[80px] h-[37px] flex items-center justify-center font-semibold rounded-lg">
+              500,00 TL
+            </p>
           </div>
-          <div className="flex gap-3 items-center mx-5 cursor-pointer ">
+          <div
+            onClick={() => {
+              window.location = "/cart";
+            }}
+            className="flex gap-3 items-center mx-5 cursor-pointer "
+          >
             <div className="border rounded-full bg-gray-300 flex items-center w-12 h-12 justify-center">
               <PiBasket size={"40px"} />
               <div className="absolute top-4 right-[110px] rounded-full  flex items-center justify-center w-7 h-7 bg-gray-200">
-                <span className="font-bold text-lg text-green-800">
+                <span className="font-bold text-lg text-slate-500">
                   {totalCount}
                 </span>
               </div>

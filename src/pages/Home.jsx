@@ -11,7 +11,7 @@ import CategoryList from "../components/CategoryList";
 
 const ref = collection(db, "products");
 
-const Home = () => {
+const Home = ({users}) => {
   const [data] = useCollectionData(ref);
   const authstate = useAuthState(auth);
   const isUser = authstate[0]?.uid;
@@ -51,7 +51,7 @@ const Home = () => {
           ))}
         </div>
       )}
-      <Products />
+      <Products users={users} />
     </>
   );
 };

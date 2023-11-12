@@ -13,23 +13,25 @@ import { auth } from "./firebase";
 
 function App() {
   const [users, setUsers] = useState(null);
-  useEffect(()=>{
-    onAuthStateChanged(auth,(user)=>{
-      if(user){
-        const uid = user.uid
-        setUsers(user)
-      }else{
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setUsers(user);
+      } else {
         // user is signed out
         // ...
       }
-    })
-  },[])
+    });
+  }, []);
   return (
     <>
       <Navbar users={users} />
       <Routes>
         <Route path="/auth" element={<Auth />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home users={users} />} />
+        <Route path="/cart" element={<Basket />} />
+        <Route path="/wallet" element={<MyWallet />} />
       </Routes>
       <ToastContainer position="top-right" autoClose={5000} theme="light" />
     </>

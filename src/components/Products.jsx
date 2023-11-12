@@ -6,12 +6,12 @@ import ProductCart from "./ProductCart";
 
 const ref = collection(db,"products");
 
-const Products = () => {
+const Products = ({users}) => {
   const  [data]  = useCollectionData(ref);
   return (
     <div className="flex flex-wrap items-center justify-center gap-1 py-4">
       {data?.map((product,id)=>(
-        <ProductCart  key={id} product={product} />
+        <ProductCart users={users} key={id} product={product} />
       ))}
     </div>
   )

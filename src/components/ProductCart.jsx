@@ -3,12 +3,21 @@ import { useState } from "react";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../redux/features/counterSlice";
-import {BiPlus} from "react-icons/bi"
+import { BiPlus } from "react-icons/bi";
 
-const ProductCart = ({ product }) => {
+const ProductCart = ({ product, users }) => {
   const count = useSelector((state) => state.counter[product.name]?.value);
-  console.log(product.name,count);
+  console.log(product.name, count);
   const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    // kullanıcı kontrolu
+    if (users) {
+      dispatch(addToCart({ productId: product.name }));
+    } else {
+      window.location = "/auth";
+    }
+  };
 
   return (
     <div className="flex w-[450px] p-4 m-1 border rounded-md h-[450px] items-center justify-center flex-col shadow-md ">
@@ -30,12 +39,14 @@ const ProductCart = ({ product }) => {
           Stokta {product?.count} adet
         </div>
         <button
-          onClick={() => dispatch(addToCart({productId :product.name }))}
+          onClick={handleAddToCart}
           className="relative left-[140px] bottom-8 border bg-slate-400 rounded-full w-12 h-12 hover:animate-pulse"
         >
           <TbShoppingCartPlus size={"30px"} className="relative left-2 top-1" />
           <div className="relative bottom-9 left-7 text-md font-bold border rounded-full w-6 h-6 text-center bg-gray-50">
-            <span className="text-slate-500">{count == undefined ? <BiPlus size={'22px'} /> : count}</span>
+            <span className="text-slate-500">
+              {count == undefined ? <BiPlus size={"22px"} /> : count}
+            </span>
           </div>
         </button>
       </div>
