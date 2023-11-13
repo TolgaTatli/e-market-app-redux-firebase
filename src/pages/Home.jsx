@@ -6,6 +6,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
 import CategoryList from "../components/CategoryList";
+import image from "/homeimage.png";
 
 const ref = collection(db, "products");
 
@@ -37,6 +38,7 @@ const Home = ({ users }) => {
             </p>
             <SearchBar />
           </div>
+          <img src={image} className="object-contain m-auto" />
         </div>
       ) : (
         <div className="border bg-gradient-to-r from-slate-200 to-slate-400 flex justify-evenly">
