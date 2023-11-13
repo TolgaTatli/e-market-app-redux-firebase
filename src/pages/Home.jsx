@@ -15,9 +15,9 @@ const Home = ({ users }) => {
   const authState = useAuthState(auth);
   const isUser = authState[0]?.uid;
 
-  const [uniqueCategories, setUniqueCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [uniqueCategories, setUniqueCategories] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

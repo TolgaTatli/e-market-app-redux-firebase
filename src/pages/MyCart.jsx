@@ -14,7 +14,6 @@ const MyCart = () => {
   const cartItems = useSelector((state) => state.counter);
   const dispatch = useDispatch();
 
-  // Sepetteki ürünleri filtrele
   const cartProducts = data?.filter(
     (product) => cartItems[product.name]?.value > 0
   );

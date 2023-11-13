@@ -7,6 +7,8 @@ import { addToCart, removeFromCart } from "../redux/features/counterSlice";
 import { LuWallet } from "react-icons/lu";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { getInitialStateFromLocalStorage } from "../localstorage";
+import Chart from "chart.js/auto";
+import MyChart from "../components/MyChart";
 
 const ref = collection(db, "products");
 
@@ -61,17 +63,16 @@ const MyWallet = () => {
 
       {/* Sepet içeriği */}
       {cartProducts && cartProducts.length > 0 ? (
-        <div className="flex flex-col">
-          <div className="flex flex-col items-start gap-4 py-12">
-            <div className="flex justify-around items-center w-full px-12 ">
+        <div>
+          <div className="flex flex-col items-start gap-7 py-12">
+            <div className="flex items-center w-full px-12 ">
               <p className="text-3xl font-bold">Sepetinizdeki Ürünler</p>
-              <p className="text-3xl font-bold">Bakiye Bilgileri</p>
             </div>
-            <div className="flex flex-wrap justify-between gap-12 px-12">
+            <div className="gap-12 px-12 w-full my-2">
               {cartProducts.map((product, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-6  border-2 w-[1000px] rounded-lg border-slate-300 m-auto"
+                  className="flex items-center justify-between p-6 border-2 gap-3 rounded-lg border-slate-300 "
                 >
                   <div className="flex items-center p-2 gap-6 justify-center">
                     <img
@@ -111,7 +112,13 @@ const MyWallet = () => {
                   </div>
                 </div>
               ))}
-              <div className="w-[620px]">
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center ">
+            <div>
+              <p className="text-3xl font-bold mx-14">Bakiye Bilgileri</p>
+              <div className="w-[140%] mx-8">
                 <div className="border-2 m-4 p-3 rounded-lg border-slate-300 ">
                   <div className="flex items-center justify-evenly py-2">
                     <p className="text-xl font-bold">Toplam Bakiyeniz :</p>
@@ -139,26 +146,24 @@ const MyWallet = () => {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* ChartjS */}
-          <div className="p-4">
-            <p className="text-3xl font-bold">Harcamalarınızın Dağılımı</p>
-            <div className="flex py-12 gap-4 items-center">
-              <p className="text-xl font-bold">Toplam Sepet Tutarınız :</p>
-              <p className="bg-gradient-to-r from-slate-300 to-slate-400 w-[110px] h-[45px] text-xl flex items-center justify-center font-semibold rounded-lg border-2 border-blue-950">
-                {calculateTotal(cartItems, data).toLocaleString("tr-TR", {
-                  style: "currency",
-                  currency: "TRY",
-                })}
-              </p>
+            <div className="px-16">
+              <p className="text-3xl font-bold">Harcamalarınızın Dağılımı</p>
+              <div className="flex py-12 gap-4 items-center">
+                <p className="text-xl font-bold">Toplam Sepet Tutarınız :</p>
+                <p className="bg-gradient-to-r from-slate-300 to-slate-400 w-[110px] h-[45px] text-xl flex items-center justify-center font-semibold rounded-lg border-2 border-blue-950">
+                  {calculateTotal(cartItems, data).toLocaleString("tr-TR", {
+                    style: "currency",
+                    currency: "TRY",
+                  })}
+                </p>
+              </div>
+                <MyChart data={data} />
             </div>
+            
           </div>
-          <div>
-            Chart JS
-          </div>
-          <div>
-            <button className=" w-[250px] h-[62px] text-2xl font-semibold text-white bg-gray-500 rounded-2xl">
+          <div className="relative top-12 left-[1600px]">
+            <button className="w-[250px] h-[62px] text-2xl font-semibold text-white bg-gray-500 rounded-2xl">
               Sepeti Onayla
             </button>
           </div>
