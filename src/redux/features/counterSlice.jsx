@@ -17,7 +17,6 @@ export const counterSlice = createSlice({
         state[productId] = { value: 1 };
       }
       state.totalValue +=1;
-      console.log('Total',state.totalValue);
     },
   },
 });

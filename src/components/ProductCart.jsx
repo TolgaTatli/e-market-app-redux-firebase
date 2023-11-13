@@ -7,7 +7,6 @@ import { BiPlus } from "react-icons/bi";
 
 const ProductCart = ({ product, users }) => {
   const count = useSelector((state) => state.counter[product.name]?.value);
-  console.log(product.name, count);
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {

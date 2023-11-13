@@ -51,8 +51,8 @@ const Navbar = ({ users }) => {
               <LuWallet size={"40px"} />
             </div>
             <p className="font-semibold text-lg">Cüzdanım</p>
-            <p className="bg-slate-300 w-[80px] h-[37px] flex items-center justify-center font-semibold rounded-lg">
-              500,00 TL
+            <p className="bg-slate-300 max-w-[100px] h-[37px] flex items-center justify-center font-semibold rounded-lg">
+              30.000,00 TL
             </p>
           </div>
           <div
