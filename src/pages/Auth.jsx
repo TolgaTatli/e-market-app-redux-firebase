@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { toast } from "react-toastify";
 import { FaShoppingBasket } from "react-icons/fa";
+import { useEffect } from "react";
 
 const Auth = () => {
   const authComponentStyle = {
@@ -30,6 +31,16 @@ const Auth = () => {
       toast.error(error.message);
     }
   };
+
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location = "/";
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>

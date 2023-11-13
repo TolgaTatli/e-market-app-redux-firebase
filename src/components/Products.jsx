@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { collection } from "firebase/firestore";
 import { db } from "../firebase";
@@ -6,16 +6,17 @@ import ProductCart from "./ProductCart";
 
 const ref = collection(db, "products");
 
-const Products = ({ users, selectedCategory }) => {
+const Products = ({ users, selectedCategory, searchKeyword }) => {
   const [data] = useCollectionData(ref);
 
-  useEffect(() => {
-  }, [selectedCategory]);
-
-  const filteredProducts = data?.filter(
-    (product) =>
-      selectedCategory === null || product.category === selectedCategory
-  );
+  const filteredProducts = data?.filter((product) => {
+    const categoryFilter =
+      !selectedCategory || product.category === selectedCategory;
+    const searchFilter =
+      !searchKeyword ||
+      product.name.toLowerCase().includes(searchKeyword.toLowerCase());
+    return categoryFilter && searchFilter;
+  });
 
   return (
     <div

@@ -6,8 +6,10 @@ import { LuWallet } from "react-icons/lu";
 import { PiBasket } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import counterSlice from "../redux/features/counterSlice";
+import walletSlice from "../redux/features/walletSlice";
 
 const Navbar = ({ users }) => {
+  const totalBalance = useSelector((state) => state.wallet.formattedBalance);
   const totalCount = useSelector((state) => state.counter.totalValue);
   return (
     <div className="flex border border-gray-200 bg-gray-100 p-4 ">
@@ -52,7 +54,7 @@ const Navbar = ({ users }) => {
             </div>
             <p className="font-semibold text-lg">Cüzdanım</p>
             <p className="bg-slate-300 max-w-[100px] h-[37px] flex items-center justify-center font-semibold rounded-lg">
-              30.000,00 TL
+              {totalBalance}
             </p>
           </div>
           <div

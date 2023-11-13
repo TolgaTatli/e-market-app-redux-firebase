@@ -17,12 +17,19 @@ const Home = ({ users }) => {
 
   const [uniqueCategories, setUniqueCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
-    const categories = data?.map((item) => item?.category) || [];
-    const uniqueCategoriesSet = new Set(categories);
-    setUniqueCategories([...uniqueCategoriesSet]);
-  }, [data]);
+    const fetchData = async () => {
+      const categories = data?.map((item) => item?.category) || [];
+      const uniqueCategoriesSet = new Set(categories);
+      setUniqueCategories([...uniqueCategoriesSet]);
+    };
+
+    if (isUser !== null) {
+      fetchData();
+    }
+  }, [data, isUser]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -36,13 +43,13 @@ const Home = ({ users }) => {
             <p className="text-3xl font-bold px-16 ">
               En uygun fiyatlara ulaşmak için giriş yapın!
             </p>
-            <SearchBar />
+            <SearchBar setSearchKeyword={setSearchKeyword} />
           </div>
           <img src={image} className="object-contain m-auto" />
         </div>
       ) : (
-        <div className="border bg-gradient-to-r from-slate-200 to-slate-400 flex justify-evenly">
-          <SearchBar />
+        <div className="border bg-gradient-to-r from-slate-200 to-slate-400 flex justify-between">
+          <SearchBar setSearchKeyword={setSearchKeyword} />
           {uniqueCategories.map((category, id) => (
             <div className="flex justify-center items-center" key={id}>
               <CategoryList
@@ -54,7 +61,11 @@ const Home = ({ users }) => {
           ))}
         </div>
       )}
-      <Products users={users} selectedCategory={selectedCategory} />
+      <Products
+        users={users}
+        selectedCategory={selectedCategory}
+        searchKeyword={searchKeyword}
+      />
     </>
   );
 };
