@@ -1,19 +1,38 @@
 import React, { useEffect } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { LuWallet } from "react-icons/lu";
 import { PiBasket } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/features/counterSlice";
+import { data } from "autoprefixer";
+import { collection } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
+const ref = collection(db, "products");
 
 const Navbar = ({ users }) => {
   const dispatch = useDispatch();
+  const [data] = useCollectionData(ref);
   const totalBalance = useSelector((state) => state.wallet.formattedBalance);
+  const totalBalanceNum = useSelector((state) => state.wallet.totalBalanceNum);
   const totalCount = useSelector((state) => state.counter.totalValue);
+  const cartItems = useSelector((state) => state.counter);
   let localTotalCount = localStorage.getItem("totalValue");
+
   localTotalCount = localTotalCount ? parseInt(localTotalCount, 10) : 0;
+  const calculateTotal = (cartItems, products) => {
+    let total = 0;
+    for (const productName in cartItems) {
+      const product = products?.find((p) => p.name === productName);
+      if (product) {
+        total += cartItems[productName].value * product.price;
+      }
+    }
+    return total;
+  };
+  const restBalance = totalBalanceNum - calculateTotal(cartItems, data);
 
   useEffect(() => {
     // Redux store'daki değeri güncelle
@@ -62,7 +81,10 @@ const Navbar = ({ users }) => {
             </div>
             <p className="font-semibold text-lg">Cüzdanım</p>
             <p className="bg-slate-300 max-w-[100px] h-[37px] flex items-center justify-center font-semibold rounded-lg">
-              {totalBalance}
+              {restBalance.toLocaleString("tr-TR", {
+                style: "currency",
+                currency: "TRY",
+              })}
             </p>
           </div>
           <div

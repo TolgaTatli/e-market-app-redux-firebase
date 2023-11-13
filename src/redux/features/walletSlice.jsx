@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const totalBalance = 30000;
-const formattedBalance = totalBalance.toLocaleString("tr-TR", {
+const totalBalanceNum = 30000;
+const formattedBalance = totalBalanceNum.toLocaleString("tr-TR", {
   style: "currency",
   currency: "TRY",
 });
 
 const initialState = {
   formattedBalance,
+  totalBalanceNum,
 };
 
 export const walletSlice = createSlice({

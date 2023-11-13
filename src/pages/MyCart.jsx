@@ -59,29 +59,40 @@ const MyCart = () => {
 
               <div className="flex gap-9 items-center justify-center">
                 <div className="flex gap-2 items-center justify-center border rounded-full bg-blue-100">
-                <AiOutlineMinusCircle
-                  size={"50px"}
-                  color="red"
-                  className="cursor-pointer"
-                  onClick={() => handleRemoveFromCart(product.name)}
-                />
+                  <AiOutlineMinusCircle
+                    size={"50px"}
+                    color="red"
+                    className="cursor-pointer"
+                    onClick={() => handleRemoveFromCart(product.name)}
+                  />
 
-                <p className="font-bold text-2xl">{cartItems[product.name].value}</p>
-                <AiOutlinePlusCircle
-                  color="green"
-                  className="cursor-pointer"
-                  size={"50px"}
-                  onClick={() => handleAddToCart(product.name)}
-                />
-
+                  <p className="font-bold text-2xl">
+                    {cartItems[product.name].value}
+                  </p>
+                  <AiOutlinePlusCircle
+                    color="green"
+                    className="cursor-pointer"
+                    size={"50px"}
+                    onClick={() => handleAddToCart(product.name)}
+                  />
                 </div>
-                
-                <p className="text-3xl font-bold text-blue-800 ">{product.price} TL</p>
+
+                <p className="text-3xl font-bold text-blue-800 ">
+                  {product.price} TL
+                </p>
               </div>
             </div>
           ))}
-          {/* Toplam fiyatı göster */}
-          
+          <div className="flex w-[1920px] justify-end py-14 px-14">
+            <button
+              onClick={()=> {
+                window.location = "/wallet"
+              }}
+              className=" w-[450px] h-[82px] text-3xl font-bold text-white bg-gray-500 rounded-2xl"
+            >
+              Sepeti Onayla
+            </button>
+          </div>
         </div>
       ) : (
         <div className="text-center p-4">Sepetinizde ürün bulunmamaktadır.</div>
