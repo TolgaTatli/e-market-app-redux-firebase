@@ -24,6 +24,3 @@ dist-ssr
 *.sw?
 
 
-# firebase/firestore documents
-
-/src/firebase.js
