@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
-import Basket from "./pages/Basket";
+import MyCart from "./pages/MyCart";
 import MyWallet from "./pages/MyWallet";
 import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/auth" element={<Auth />} />
         <Route path="/" element={<Home users={users} />} />
-        <Route path="/cart" element={<Basket />} />
+        <Route path="/cart" element={<MyCart />} />
         <Route path="/wallet" element={<MyWallet />} />
       </Routes>
       <ToastContainer position="top-right" autoClose={5000} theme="light" />

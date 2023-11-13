@@ -13,7 +13,9 @@ const initialState = {
 export const walletSlice = createSlice({
   name: "wallet",
   initialState,
-  reducers: {},
+  reducers: {
+    // Buraya ürün sepete eklendiğinde sepetin fiyatından düşülecek!
+  },
 });
 
 export const {} = walletSlice.actions;

@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { auth } from "../firebase";
 import { LuWallet } from "react-icons/lu";
 import { PiBasket } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
-import counterSlice from "../redux/features/counterSlice";
-import walletSlice from "../redux/features/walletSlice";
+import { addToCart } from "../redux/features/counterSlice";
+
 
 const Navbar = ({ users }) => {
+  const dispatch = useDispatch();
   const totalBalance = useSelector((state) => state.wallet.formattedBalance);
   const totalCount = useSelector((state) => state.counter.totalValue);
+  let localTotalCount = localStorage.getItem("totalValue");
+  localTotalCount = localTotalCount ? parseInt(localTotalCount, 10) : 0;
+
+  useEffect(() => {
+    // Redux store'daki değeri güncelle
+    dispatch(addToCart({ productId: "ProductId" }));
+  }, [dispatch]);
   return (
     <div className="flex border border-gray-200 bg-gray-100 p-4 ">
       <div className="flex gap-12 flex-1 items-center mx-6">
@@ -67,7 +75,7 @@ const Navbar = ({ users }) => {
               <PiBasket size={"40px"} />
               <div className="absolute top-4 right-[110px] rounded-full  flex items-center justify-center w-7 h-7 bg-gray-200">
                 <span className="font-bold text-lg text-slate-500">
-                  {totalCount}
+                  {localTotalCount}
                 </span>
               </div>
             </div>
