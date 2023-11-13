@@ -41,14 +41,19 @@ const Auth = () => {
     });
     return () => unsubscribe();
   }, []);
+  
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    authFunction();
+  };
   return (
     <>
       <div
         style={authComponentStyle}
         className="p-2  h-[80vh] flex items-center justify-center"
       >
-        <div className="m-auto p-32 border border-slate-100 bg-gradient-to-r from-slate-50 to-slate-200 rounded-3xl flex flex-col items-center justify-center gap-3 h-[480px] w-[780px]">
+        <form onSubmit={handleSubmit} className="m-auto p-32 border border-slate-100 bg-gradient-to-r from-slate-50 to-slate-200 rounded-3xl flex flex-col items-center justify-center gap-3 h-[480px] w-[780px]">
           <h2 className="text-xl">E-Mailiniz</h2>
           <input
             name="email"
@@ -70,12 +75,12 @@ const Auth = () => {
           />
 
           <button
-            onClick={authFunction}
             className="border border-slate-300 font-bold rounded-full bg-gradient-to-r from-blue-100 to-blue-300 w-full p-3 my-4"
+            type="submit"
           >
             Giriş Yap
           </button>
-        </div>
+        </form>
       </div>
       <footer>
         <div className="flex items-center gap-4 p-2 my-2">
